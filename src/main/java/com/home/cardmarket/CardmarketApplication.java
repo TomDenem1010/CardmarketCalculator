@@ -2,7 +2,7 @@ package com.home.cardmarket;
 
 import java.util.Map;
 
-import com.home.cardmarket.common.CommandLineTypeEnum;
+import com.home.cardmarket.common.CommandTypeHandlerEnum;
 
 import lombok.extern.slf4j.Slf4j;
 import picocli.CommandLine;
@@ -21,7 +21,7 @@ public class CardmarketApplication implements Runnable {
 
 	@Override
 	public void run() {
-		CommandLineTypeEnum.executeCommand(type, Map.of("filePath", getOrEmpty(filePath)));
+		CommandTypeHandlerEnum.executeCommand(type, Map.of("filePath", getOrEmpty(filePath)));
 	}
 
 	public static void main(String[] args) {

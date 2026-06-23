@@ -7,15 +7,15 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @AllArgsConstructor
-public enum CommandLineTypeEnum {
+public enum CommandTypeHandlerEnum {
 
-    SUM_CSV_HANDLER("sum-csv-file", new SumCsvHandler());
+    SUM_CSV_HANDLER("sum-csv", new SumCsvHandler());
 
     public final String command;
     public final TypeHandler handler;
 
     public static void executeCommand(String command, java.util.Map<String, String> params) {
-        for (CommandLineTypeEnum type : CommandLineTypeEnum.values()) {
+        for (CommandTypeHandlerEnum type : CommandTypeHandlerEnum.values()) {
             if (type.command.equals(command)) {
                 log.debug("Executing command: {} with parameters: {}", command, params);
                 type.handler.handle(params);
