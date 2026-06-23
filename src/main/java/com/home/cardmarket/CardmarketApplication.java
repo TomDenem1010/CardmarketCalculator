@@ -1,8 +1,8 @@
 package com.home.cardmarket;
 
-import org.jsoup.nodes.Document;
+import java.util.Map;
 
-import com.home.cardmarket.common.UrlCaller;
+import com.home.cardmarket.common.CommandLineTypeEnum;
 
 import lombok.extern.slf4j.Slf4j;
 import picocli.CommandLine;
@@ -13,12 +13,15 @@ import picocli.CommandLine.Option;
 @Command(name = "card-market-calculator", mixinStandardHelpOptions = true, version = "1.0", description = "A command-line application for calculating card market values.")
 public class CardmarketApplication implements Runnable {
 
-	@Option(names = "--url")
-	private String url;
+	@Option(names = "--type")
+	private String type;
+
+	@Option(names = "--filePath")
+	private String filePath;
 
 	@Override
 	public void run() {
-		UrlCaller.getByUrl(url, Document.class);
+		CommandLineTypeEnum.executeCommand(type, Map.of("filePath", getOrEmpty(filePath)));
 	}
 
 	public static void main(String[] args) {
@@ -26,4 +29,7 @@ public class CardmarketApplication implements Runnable {
 		System.exit(exitCode);
 	}
 
+	private String getOrEmpty(String value) {
+		return value != null ? value : "";
+	}
 }
