@@ -2,8 +2,6 @@ package com.home.cardmarket;
 
 import java.util.Map;
 
-import com.home.cardmarket.common.CommandTypeHandlerEnum;
-
 import lombok.extern.slf4j.Slf4j;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;

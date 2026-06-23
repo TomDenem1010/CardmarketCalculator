@@ -1,4 +1,4 @@
-package com.home.cardmarket.common;
+package com.home.cardmarket;
 
 import java.util.Map;
 

@@ -1,9 +1,9 @@
-package com.home.cardmarket.common;
+package com.home.cardmarket;
 
 import java.util.Map;
 
-import com.home.cardmarket.common.commandhandler.SumCsvExampleHandler;
-import com.home.cardmarket.common.commandhandler.SumCsvHandler;
+import com.home.cardmarket.commandhandler.SumCsvExampleHandler;
+import com.home.cardmarket.commandhandler.SumCsvHandler;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

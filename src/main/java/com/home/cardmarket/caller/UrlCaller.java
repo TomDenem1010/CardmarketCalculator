@@ -1,4 +1,4 @@
-package com.home.cardmarket.common.caller;
+package com.home.cardmarket.caller;
 
 import java.io.IOException;
 import java.net.URI;
