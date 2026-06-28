@@ -1,6 +1,7 @@
 package com.home.cardmarket.commandhandler;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,15 +22,20 @@ public class SumCsvHandler implements TypeHandler {
     public void handle(Map<InputEnum, String> params) {
         List<Map<CsvHeaderEnum, String>> rows = new CsvReader().read(params.get(InputEnum.FILE_PATH));
         setRowValues(rows);
-        log.debug("Rows after setting values: {}", rows);
+        List<List<String>> csvRows = new ArrayList<>(List.of(CsvHeaderEnum.getHeaders()));
+        setcsvRows(rows, csvRows);
+
         new CsvWriter().write(
                 Path.of(params.get(InputEnum.FILE_PATH)).getParent().toString(),
                 "sumCsv",
-                List.of(
-                        CsvHeaderEnum.getHeaders()));
+                csvRows);
     }
 
     private void setRowValues(List<Map<CsvHeaderEnum, String>> rows) {
         rows.forEach(row -> new CmValueSetter().setValue(row));
+    }
+
+    private void setcsvRows(List<Map<CsvHeaderEnum, String>> rows, List<List<String>> csvRows) {
+        rows.forEach(row -> csvRows.add(CsvHeaderEnum.getRowValues(row)));
     }
 }
