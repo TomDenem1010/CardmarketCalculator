@@ -33,7 +33,10 @@ public class Caller {
 
     private HttpResponse<String> sendRequest(HttpClient client, HttpRequest request) {
         try {
-            return client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            log.debug("Successfully sent request and got response headers: {}", response.headers());
+            log.debug("Successfully sent request and got response body: {}", response.body());
+            return response;
         } catch (Exception e) {
             log.error("Failed to send request to URL: {}", request.uri(), e);
             throw new SendingRequestException();
@@ -55,7 +58,9 @@ public class Caller {
 
     private Document parseHtml(String html) {
         try {
-            return Jsoup.parse(html);
+            Document document = Jsoup.parse(html);
+            log.debug("Successfully parsed HTML document: {}", document.toString());
+            return document;
         } catch (Exception e) {
             log.error("Failed to parse HTML", e);
             throw new HtmlParseException();
