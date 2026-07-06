@@ -9,7 +9,6 @@ import com.home.cardmarket.exception.UnexpectedException;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.LoadState;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,11 +19,13 @@ public class Caller {
 
     public Document callWithPlaywright(String url, Browser browser) {
         try {
-            BrowserContext context = browser.newContext();
-            Page page = context.newPage();
+            BrowserContext context = browser.contexts().get(0);
+            Page page = context.pages().isEmpty()
+                    ? context.newPage()
+                    : context.pages().get(0);
 
             page.navigate(url);
-            page.waitForLoadState(LoadState.NETWORKIDLE);
+            page.waitForLoadState();
 
             String html = page.content();
 
