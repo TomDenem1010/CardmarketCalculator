@@ -10,6 +10,7 @@ import com.home.cardmarket.TypeHandler;
 import com.home.cardmarket.file.CsvReader;
 import com.home.cardmarket.file.CsvWriter;
 import com.home.cardmarket.rest.CmValueSetter;
+import com.home.cardmarket.rest.PlaywrightBrowserContext;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +36,9 @@ public class SumCsvHandler implements TypeHandler {
     }
 
     private void setRowValues(List<Map<CsvHeaderEnum, String>> rows) {
-        rows.forEach(row -> new CmValueSetter().setValue(row));
+        PlaywrightBrowserContext context = new PlaywrightBrowserContext();
+        rows.forEach(row -> new CmValueSetter().setValue(row, context.getBrowser()));
+        context.close();
     }
 
     private void setcsvRows(List<Map<CsvHeaderEnum, String>> rows, List<List<String>> csvRows) {

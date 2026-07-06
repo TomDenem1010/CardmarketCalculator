@@ -6,6 +6,14 @@ A command-line application for calculating and aggregating card market values fr
 
 - Java 25+
 
+## Chrome
+
+```bash
+chromeStarter.cmd
+```
+
+After start login to cardmarket.
+
 ## Build
 
 ```bash

@@ -8,6 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import com.home.cardmarket.commandhandler.CsvHeaderEnum;
+import com.microsoft.playwright.Browser;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 public class CmValueSetter {
 
-    public void setValue(Map<CsvHeaderEnum, String> params) {
-        Document document = new Caller().call(params.get(CsvHeaderEnum.URL));
+    public void setValue(Map<CsvHeaderEnum, String> params, Browser browser) {
+        Document document = new Caller().callWithPlaywright(params.get(CsvHeaderEnum.URL), browser);
         params.put(
                 CsvHeaderEnum.PRICE_FROM,
                 getValue(document, "From"));
